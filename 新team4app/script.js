@@ -68,7 +68,7 @@ const characterDescriptions = {
 HAKS: {
   title: "HAKS｜サラサラチーター",
   catch: "着こなしも気分も、<br>軽やかに駆け抜けるスピードスター",
-  image: "C:/Users/raru_/OneDrive/ドキュメント/team4/新team4app/画像一覧/チーター.jpg",
+  image: "新team4app/画像一覧/チーター.jpg",
   type: {
     heading: "■あなたの性質",
     text: "チーターのように軽やかで、どんな環境にもすっと溶け込むタイプです。暑さや寒さの変化に柔軟に対応でき、快適さと行動力のバランスを直感的に調整できます。外出先や日常のちょっとした瞬間でも最適な服や行動を自然に選び、周囲には爽やかで整った印象を与えるでしょう。アクティブで動き回ることも好きですが、その一方で人との距離感や空気も敏感に察知できる観察力の高さも持っています。計画的に動きつつも臨機応変に対応できる自由さがあり、新しいことに挑戦することも苦になりません。その軽やかさがあなたの最大の魅力であり、周囲から自然と好感を持たれる理由です。"
@@ -766,4 +766,5 @@ function shareX(typeTitle) {
 function shareLine(typeTitle) {
   const text = encodeURIComponent(`私の体感温度タイプは 【${typeTitle}】 でした！\n${window.location.href}`);
   window.open(`https://social-plugins.line.me/lineit/share?url=${text}`, '_blank');
+
 }
