@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>体感温度タイプ診断</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+</head>
+<body>
+  <div class="container">
+    <!-- ⭐ スタート画面 -->
+    <div id="start-screen">
+      <h1>お天気クローゼット</h1>
+      <p>あなたの体感温度タイプを診断します。</p>
+      <button class="btn" onclick="startQuiz()">診断スタート</button>
+    </div>
+
+    <!-- ⭐ 質問エリア -->
+ <div class="question-area" style="display:none;">
+  <div class="question" id="question-text"></div>
+  <div class="options" id="options"></div>
+  <div class="quiz-buttons">
+    <button class="btn" id="back-btn" onclick="prevQuestion()">戻る</button>
+    </div>
+</div>
+
+    <!-- ⭐ 結果エリア -->
+    <div class="result-area" id="result" style="display:none;">
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

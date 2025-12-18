@@ -1,0 +1,625 @@
+/* style.css */
+/* ------- 画面全体：背景色を固定 ------- */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: "Helvetica Neue", "Yu Gothic", sans-serif;
+  background: #8e8e84 !important; /* ← ここを固定。!importantでJSの上書きを防ぎます */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ------- 中央の縦長パネル（固定で 9:16） ------- */
+.container {
+  width: 40vw;                 /* PC でも必ず細長く見える */
+  aspect-ratio: 9 / 16;        /* ← これがスマホ縦比率を忠実に再現 */
+  max-width: 480px;            /* 実際のスマホ幅に近づける */
+  max-height: 850px;           /* スマホ高さに近づける */
+
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.25);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;     /* ← 真ん中に寄せる */
+  align-items: center;
+  text-align: center;
+
+  overflow: hidden;
+  padding: 5%;
+  box-sizing: border-box;
+  animation: fadein 0.5s ease;
+}
+
+/* ------- スタート画面中央寄せ ------- */
+#start-screen {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  /* ← 縦中央 */
+  align-items: center;
+}
+
+/* ------- スタート画面が消えるとき ------- */
+#start-screen.hidden {
+  display: none !important;
+}
+
+/* ------- テキストサイズ調整 ------- */
+h1 {
+  font-size: clamp(20px, 2.8vw, 32px);
+  margin-bottom: 1em;
+}
+
+h3 {
+  font-size: 22px;
+  margin-bottom: -10px;
+}
+
+h4 {
+  font-size: 25px;
+  margin-bottom: -15px;
+}
+
+p {
+  font-size: clamp(14px, 1.4vw, 20px);
+  margin-bottom: 2em;
+}
+
+
+/* ------- ボタンふわっと ------- */
+.btn {
+  padding: 0.8em 2em;
+  border: none;
+  border-radius: 20px;
+  background: #8f8e8e;
+  color: white;
+  cursor: pointer;
+  transition: 0.25s;
+  font-size: clamp(14px, 1.2vw, 20px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+}
+
+.btn:hover {
+  transform: translateY(-4px) scale(1.04);
+  background: #6c6c6c;
+}
+
+/* ------- 結果画面スクロール可 ------- */
+.result-area {
+  width: 100%;
+  flex: 1;
+  overflow-y: auto;
+  padding: 2em 0;
+}
+
+.result-area h2 {
+  font-size: 14px; /* 好きなサイズでOK */
+}
+
+/* ------- 質問画面 ------- */
+.question {
+  font-size: clamp(14px, 1.4vw, 22px);
+  font-weight: 600;
+  margin-bottom: 1em;
+}
+
+.options label {
+  display: block;
+  margin: 0.5em 0;
+  padding: 1em;
+  background: #e7e6e6;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: clamp(14px, 1.2vw, 20px);
+  transition: 0.2s ease;
+}
+
+.options label:hover {
+  transform: translateY(-3px) scale(1.02);
+  background: #cecece;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+}
+
+.quiz-buttons {
+  margin-top: 1em;
+  display: flex;
+  justify-content: center;
+}
+
+/* ------- ふわっと表示アニメ ------- */
+@keyframes fadein {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ------- グラフ（MBTI風バー）のスタイル ------- */
+.analysis-charts {
+  margin: 20px 0;
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 12px;
+  text-align: left;
+}
+
+.chart-row {
+  margin-bottom: 15px;
+}
+
+.chart-row .labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 4px;
+  color: #555;
+}
+
+.bar-container {
+  width: 100%;
+  height: 12px;
+  background: #e0e0e0; /* ベースの色（左側の色） */
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 右側の要素に寄っている分だけ色を塗る */
+.bar-fill {
+  height: 100%;
+  background: #8e8e84; /* バーのアクセントカラー */
+  position: absolute;
+  transition: width 1s ease-out;
+  border-radius: 0 6px 6px 0;
+}
+
+/* ------- グラフ（MBTI風バー）のスタイル ------- */
+.analysis-charts {
+  margin: 20px 0;
+  padding: 20px;
+  background: #fdfdfd;
+  border-radius: 15px;
+  text-align: left;
+  border: 1px solid #eee;
+}
+
+.chart-row {
+  margin-bottom: 20px;
+}
+
+.chart-row:last-child {
+  margin-bottom: 0;
+}
+
+.chart-row .labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #444;
+}
+
+/* --- 共通設定：中身の色を消して、土台を作る --- */
+.bar-container {
+  width: 100%;
+  height: 14px;
+  border-radius: 7px;
+  position: relative;
+  overflow: hidden;
+  background: #eee; /* デフォルト色 */
+}
+
+.bar-fill {
+  height: 100%;
+  position: absolute;
+  right: 0;
+  transition: width 1.2s ease-out;
+}
+
+/* --- 手動で個別に色を指定する --- */
+
+/* 1番目：暑がり(#FFD6D6) / 寒がり(#D6F0FF) */
+.analysis-charts .chart-row:nth-child(1) .bar-container { background-color: #FFD6E6; }
+.analysis-charts .chart-row:nth-child(1) .bar-fill { background-color: #D6F0FF; }
+
+/* 2番目：動的(#D6FFD6) / 静的(#E6D6FF) */
+.analysis-charts .chart-row:nth-child(2) .bar-container { background-color: #D6FFD6; }
+.analysis-charts .chart-row:nth-child(2) .bar-fill { background-color: #E6D6FF; }
+
+/* 3番目：快適重視(#FFF6D6) / おしゃれ重視(#FFD6E6) */
+.analysis-charts .chart-row:nth-child(3) .bar-container { background-color: #FFF6D6; }
+.analysis-charts .chart-row:nth-child(3) .bar-fill { background-color: #FFD6D6; }
+
+/* 4番目：計画派(#D6FFF0) / 気分派(#F0F0F0) */
+.analysis-charts .chart-row:nth-child(4) .bar-container { background-color: #D6FFF0; }
+.analysis-charts .chart-row:nth-child(4) .bar-fill { background-color: #F0F0F0; }
+
+/* ------- おすすめアイテムのリンクスタイル ------- */
+.item-link {
+  color: #333;           /* 文字色（お好みで） */
+  text-decoration: none;  /* 下線を消す */
+  transition: 0.2s;
+  display: inline-block;
+  padding: 2px 0;
+  font-size: 19px;
+}
+
+.item-link:hover {
+  color: #8e8e84;        /* ホバー時に少し色を変える */
+  text-decoration: underline; /* ホバー時だけ下線を出す */
+}
+
+/* リストのポインタを指マークにする */
+.result-area ul li {
+  list-style-type: "・ "; /* 箇条書きのポインタを可愛く変更（任意） */
+  margin-bottom: 8px;
+}
+
+/* ------- 結果画面の白い角丸カード ------- */
+.result-card {
+  background: rgba(255, 255, 255, 0.9); /* 白背景（少し透かせて背景画像に馴染ませる） */
+  border-radius: 20px;                   /* 角丸 */
+  padding: 20px;
+  margin-bottom: 20px;                  /* カード同士の隙間 */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* 軽い影 */
+  text-align: left;                     /* 中身は左寄せ */
+}
+
+/* タイトルカードだけは中央寄せ */
+.main-title-card {
+  text-align: center;
+}
+
+/* グラフの行間調整 */
+.analysis-charts .chart-row {
+  margin-bottom: 15px;
+}
+
+/* グラフのコンテナ自体の余白をリセット */
+.analysis-charts {
+  margin: 0;
+  padding: 0;
+}
+
+/* --- 結果画面のカードデザイン（上書き＆追加） --- */
+.result-card {
+  background: rgba(255, 255, 255, 0.85) !important; /* 白背景を少し透過 */
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  text-align: left;
+}
+
+/* グラフの土台を透明にする（追加） */
+.analysis-charts {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+/* --- 結果表示エリアのレイアウト調整 --- */
+
+/* 1. スクロールエリアを左右いっぱいに広げ、スクロールバーを右端へ */
+.result-area {
+  width: 100%;
+  flex: 1;
+  overflow-y: auto;
+  padding: 2em 0;
+  /* 親の padding 5% を打ち消して左右いっぱいにする */
+  margin-left: -5%;
+  margin-right: -5%;
+  width: calc(100% + 10%); 
+  box-sizing: border-box;
+}
+
+/* 2. 白いカード（.result-card）の横幅を広げる */
+.result-card {
+  background: rgba(255, 255, 255, 0.85) !important;
+  border-radius: 20px;
+  /* 横幅を 92% 程度まで広げ、中央に配置 */
+  width: 92%;
+  margin-left: auto;
+  margin-right: auto;
+  
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  text-align: left;
+  box-sizing: border-box; /* paddingを含めた幅計算にする */
+}
+
+/* 3. スクロールバー自体のデザイン（より右側に、スリムに） */
+.result-area::-webkit-scrollbar {
+  width: 6px;
+}
+
+.result-area::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.result-area::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+/* --- 結果画面のレイアウト微調整 --- */
+
+/* 1. スクロールエリアの設定 */
+.result-area {
+  width: 100%;
+  flex: 1;
+  overflow-y: auto;
+  
+  /* 上にしっかり余白を作る */
+  padding-top: 30px !important; 
+  padding-bottom: 40px;
+  
+  /* 左右の親要素のpaddingを打ち消してスクロールバーを右端へ */
+  margin-left: -5%;
+  margin-right: -5%;
+  width: calc(100% + 10%);
+  box-sizing: border-box;
+}
+
+/* 2. 白い角丸カードの横幅をさらに広げる */
+.result-card {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-radius: 20px;
+  
+  /* 横幅を95%に拡大 */
+  width: 95% !important; 
+  margin-left: auto;
+  margin-right: auto;
+  
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  box-sizing: border-box;
+}
+
+/* タイトルカード（一番上）の微調整 */
+.main-title-card {
+  margin-top: 0; /* padding-topで制御するため0に */
+}
+
+/* スクロールバーをより右端にスリムに配置 */
+.result-area::-webkit-scrollbar {
+  width: 5px;
+}
+.result-area::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+}
+
+/* --- 結果画面のレイアウト修正 --- */
+
+/* 1. スクロールエリア自体の設定 */
+.result-area {
+  width: 100%;
+  flex: 1;
+  overflow-y: auto;
+  
+  /* 親のpaddingを打ち消す設定を一度リセット */
+  margin-left: -5%;
+  margin-right: -5%;
+  width: calc(100% + 10%);
+  
+  /* スクロール領域の内側に上下の余白をしっかり作る */
+  /* ここで一番上のカードの上の余白を確保します */
+  padding: 30px 0 50px 0 !important; 
+  box-sizing: border-box;
+}
+
+/* 2. 白い角丸カードの横幅を「広く、かつ左右余白あり」に調整 */
+.result-card {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-radius: 20px;
+  
+  /* 横幅を 94% に設定し、左右に 3% ずつの余白ができるようにする */
+  width: 94% !important; 
+  margin-left: auto;
+  margin-right: auto;
+  
+  padding: 20px;
+  margin-bottom: 20px; /* カード同士の間隔 */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  box-sizing: border-box;
+  text-align: left;
+}
+
+/* 3. 一番上のタイトルカードの余白をリセット */
+.main-title-card {
+  margin-top: 0 !important;
+}
+
+/* 4. スクロールバーを見やすく調整 */
+.result-area::-webkit-scrollbar {
+  width: 6px;
+}
+.result-area::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+}
+
+/* ============================================================ 
+   手動調整用：結果画面の余白とサイズ
+   ============================================================ */
+
+/* 1. 結果画面全体の「上部」の余白 */
+.result-area {
+  /* ↓ 40pxを大きくすると、最初の四角がもっと下から始まります */
+  padding-top: 100px !important; 
+  padding-bottom: 60px;
+  
+  /* 左右を画面いっぱいに使うための設定（基本そのままでOK） */
+  margin-left: -5%;
+  margin-right: -5%;
+  width: calc(100% + 10%);
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+/* 2. 白い四角（カード）の大きさと左右余白 */
+.result-card {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-radius: 20px;
+
+  /* ↓ 96%を小さくする（例: 80%）と、四角が横に小さくなり、左右の余白が広がります */
+  width: 100% !important; 
+  
+  /* ↓ 20pxを大きくすると、四角同士の上下の間隔が広がります */
+  margin: 0 auto 20px auto !important;
+
+  /* ↓ 24px(上下) 20px(左右) を変えると、四角の中の文字のゆとりが変わります */
+  padding: 24px 20px !important;
+
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  box-sizing: border-box;
+}
+
+/* 3. グラフの「横幅」と「間隔」 */
+.chart-row {
+  /* ↓ 90%を小さくすると、グラフが中央に寄って短くなります */
+  width: 90% !important;
+  margin: 0 auto 25px auto !important; /* 25pxはグラフごとの上下間隔 */
+}
+
+/* 4. グラフの「太さ」 */
+.bar-container {
+  /* ↓ 18pxを大きくすると、棒グラフが太くなります */
+  height: 18px !important;
+  border-radius: 10px;
+}
+
+.quiz-buttons {
+  margin-top: 1.5em;
+  display: flex;
+  justify-content: center; /* 戻るボタンを中央に配置 */
+  width: 100%;
+}
+
+/* 戻るボタンは少し控えめな色にしても良いかもしれません */
+#back-btn {
+  background: #bbb;
+  box-shadow: none;
+}
+
+/* --- ローディングアニメーション（広告の代わり） --- */
+.loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #8e8e84;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+  margin: 10px auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 解禁ボタンを少し目立たせる */
+#unlock-container .btn {
+  background: #ffb74d; /* 少し目立つオレンジ系 */
+  font-weight: bold;
+}
+
+#ad-overlay video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* --- Amazonバナー用のスタイル --- */
+.banner-ad-container {
+  margin: 10px auto 25px auto;
+  width: 100%;
+  max-width: 340px;
+  text-align: center;
+}
+
+.banner-wrapper.amazon-theme {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  border: 2px solid #232f3e; /* Amazonネイビー */
+  transition: transform 0.2s;
+}
+
+.banner-wrapper:hover {
+  transform: scale(1.02);
+}
+
+.banner-wrapper img {
+  width: 100%;
+  display: block;
+}
+
+/* AmazonオレンジのADバッジ */
+.ad-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #ff9900; 
+  color: #232f3e;
+  font-weight: bold;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-bottom-left-radius: 8px;
+}
+
+/* style.css の .container 部分を以下に差し替え */
+.container {
+  width: 100%;                 /* スマホでは横幅いっぱい */
+  max-width: 480px;            /* PCで見てもこれ以上は広がらない（スマホサイズ） */
+  height: 100vh;               /* 画面の高さに合わせる */
+  
+  /* 以前の aspect-ratio は削除するか、以下のように調整 */
+  background: #ffffff;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.25);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  overflow-y: auto;            /* 縦に長い時にスクロールできるようにする */
+  position: relative;
+  margin: 0 auto;              /* PCで中央寄せ */
+}
+
+/* 全体背景の設定もスマホで違和感がないように修正 */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: #8e8e84; 
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;    /* 上揃えにすることでスクロールしやすく */
+}
+/* 結果画面エリアの調整 */
+.result-area {
+  padding-top: 20px !important; /* 余白を適正に */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.result-card {
+  width: 90% !important;        /* カードの横幅を少し絞って余白を作る */
+  margin: 0 auto 15px auto !important;
+}
